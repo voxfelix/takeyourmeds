@@ -1,0 +1,17 @@
+<ion-pane>
+
+<ion-header-bar class="bar-stable bar-positive">
+  <h1 class="title">Take Your Meds</h1>
+</ion-header-bar>
+
+<ion-content>
+
+  <div class="card" ng-repeat="med in Medications">
+    <div class="item item-text-wrap">{{ med.name }}, {{ med.amount }}</div>
+  </div>
+
+  <a class="button" ui-sref="addPill">Add</a>
+
+</ion-content>
+
+</ion-pane>
