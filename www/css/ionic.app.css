@@ -9723,3 +9723,9 @@ a.button {
 
 .card {
   border-top: 3px solid #387ef5; }
+
+.addpill-submit {
+  margin: auto; }
+
+.popup {
+  opacity: 1.0; }

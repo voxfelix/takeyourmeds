@@ -27,6 +27,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
+    // for main page
     .state('app', {
       url: '/',
       templateUrl: 'templates/home.html',
@@ -36,24 +37,44 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     .state('addPill', {
       url: '/addPill',
       templateUrl: 'templates/addPill.html',
-      controller: 'addPill'
+      controller: 'addPill',
     })
 
 });
 
+
+
 app.controller('index', function ($scope, $stateParams, $state) {
 
+  // list Medications
   var Medications = [
-    {name: 'Clonidine', amount: 2},
-    {name: 'guaifenesin', amount: 4}
+    {name: 'Clonidine',},
+    {name: 'Guaifenesin', amount: 4}
   ];
 
-  window.localStorage['Medications'] = JSON.stringify(Medications);
-  var MedicationsList = JSON.parse(window.localStorage['Medications'] || '{}');
+  window.localStorage['Medications'] = JSON.stringify(Medications); // get medications from localStorage
+  var MedicationsList = JSON.parse(window.localStorage['Medications'] || '{}'); // turn JSON medications to strings
+  console.log(MedicationsList)
 
-  $scope.Medications = MedicationsList;
+  $scope.Medications = MedicationsList; // create Medicatiosn list
 });
 
-app.controller('addPill', function ($scope, $stateParams) {
+
+
+app.controller('addPill', function ($scope, $stateParams, $window) {
+
+  $scope.pillData = {}
+
+  var medList = JSON.parse(window.localStorage['Medications'] || '{}');
+
+  $scope.submit = function () {
+
+    if (    ($scope.pillData.name != null)) {
+      console.log(medList)
+      medList.push($scope.pillData)
+      console.log(medList)
+    }
+
+  }
 
 });
