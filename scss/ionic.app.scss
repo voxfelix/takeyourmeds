@@ -23,13 +23,49 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "www/lib/ionic/scss/ionic";
 
 .card {
-  border-top: 3px solid $positive;
+  border-top: 4px solid $calm;
 }
 
-.addpill-submit {
+.addpill-submit, .editpill-save {
   margin: auto;
 }
 
 .popup {
   opacity: 1.0;
+}
+
+.align-right {
+  float: right;
+}
+
+.settings-button {
+  font-size: 1.6em;
+}
+
+.add-button {
+  font-size: 3em;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  color: $positive;
+}
+
+.medication {
+  border-top: 4px solid $positive;
+
+  h1 {
+    color: $positive;
+    font-size: 1.2em;
+    font-weight: 400;
+  }
+}
+
+.supplement {
+  border-top: 4px solid $assertive;
+
+  h1 {
+    color: $assertive;
+    font-size: 1.2em;
+    font-weight: 400;
+  }
 }

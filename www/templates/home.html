@@ -1,17 +1,23 @@
 <ion-pane  ng-controller="index">
 
-<ion-header-bar class="bar-stable bar-positive">
-  <h1 class="title">Take Your Meds</h1>
-</ion-header-bar>
+  <ion-header-bar class="bar-stable bar-positive">
+    <h1 class="title">Take Your Meds</h1>
+    <button class="button"><i class="ionicons ion-android-settings settings-button"></i></button>
+  </ion-header-bar>
 
-<ion-content>
+  <ion-content>
 
-  <div class="card" ng-repeat="med in Medications">
-    <div class="item item-text-wrap">{{ med.name }}, {{ med.amount }}</div>
-  </div>
+    <div class="card" ui-sref="editPill({ id: med.id })" ng-repeat="med in Medications" ng-class="{supplement : med.type == 'supplement', medication : med.type == 'medication'}">
+      <div class="item item-text-wrap">
+        <h1 class="card-title">{{ med.name }}</h1>
+        <p>Amount:<span class="align-right">{{ med.amount }}</span></p>
+        <p>Datetime:<span class="align-right">{{ med.datetime.join(', ') }}</span></p>
+        <p>Frequency:<span class="align-right">{{ med.frequency }}</span></p>
+      </div>
+    </div>
 
-  <a class="button" ui-sref="addPill">Add</a>
+  </ion-content>
 
-</ion-content>
+  <button ui-sref="addPill"><i class="icons ion-android-add-circle add-button"></i></button>
 
 </ion-pane>
