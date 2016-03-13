@@ -6,7 +6,7 @@
 var app = angular.module('starter', ['ionic', 'ngCordova', 'ngStorage', 'ui.router']);
 var db = null;
 
-app.run(function($ionicPlatform, $cordovaSQLite, $cordovaSplashscreen) {
+app.run(function($ionicPlatform, $cordovaSQLite, $rootScope, $http) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -51,60 +51,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 });
 
 
+app.service('Medications', function ($http, $q){
+  var defferer = $q.defer();
+  $http.get('db.json').then(function (data) {
+    defferer.resolve(data);
+  });
 
-app.controller('index', function ($scope, $stateParams) {
-  // list Medications
-  var Medications = [
-    {id: 1111, name: 'Memantine', amount: 1, datetime: ['10:00am', '7:00pm'], frequency: 'twice daily', type: 'medication'},
-    {id: 1112, name: 'Lysine', amount: 1, datetime: ['9:15am'], frequency: 'daily', type: 'supplement'},
-    {id: 1113, name: 'Guaifenesin', amount: 4, datetime: ['9:15am'], frequency: 'weekly', type: 'medication'},
-    {id: 1114, name: 'Clonidine', amount: 2, datetime: ['2:00pm'], frequency: 'daily', type: 'medication'},
-  ];
-
-  window.localStorage['Medications'] = JSON.stringify(Medications); // get medications from localStorage
-  var MedicationsList = JSON.parse(window.localStorage['Medications'] || '{}'); // turn JSON medications to strings
-  console.log(MedicationsList)
-
-  $scope.Medications = MedicationsList; // create Medicatiosn list
-
-  $scope.editPill = function (med) {
-    console.log(med)
-  };
-});
-
-
-
-app.controller('addPill', function ($scope, $stateParams, $window) {
-
-  $scope.pillData = {
-
+  this.getMedications = function () {
+    return defferer.promise;
   }
-
-  var medList = JSON.parse(window.localStorage['Medications'] || '{}');
-
-  $scope.submit = function () {
-
-    if (    ($scope.pillData.name != null)) {
-      console.log(medList)
-      medList.push($scope.pillData)
-      console.log(medList)
-    }
-
-  }
-
-});
-
-
-app.controller('editPill', function ($scope, $stateParams, $window) {
-
-  var medList = JSON.parse(window.localStorage['Medications'] || '{}');
-  console.log($stateParams)
-
-  for (var i = 0; i < medList.length; i++) {
-    if (medList[i].id == $stateParams.id) {
-      console.log('Found match', medList[i])
-      $scope.Medication = medList[i];
-    }
-  };
 
 });
