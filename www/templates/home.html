@@ -7,12 +7,12 @@
 
   <ion-content>
 
-    <div class="card" ui-sref="editPill({ id: med.id })" ng-repeat="med in Medications" ng-class="{supplement : med.type == 'supplement', medication : med.type == 'medication'}">
+    <div class="card" ui-sref="editPill({ id: med.id })" ng-repeat="med in Medications" ng-class="{supplement: med.type == 'Supplement', medication: med.type == 'Medication'}">
       <div class="item item-text-wrap">
         <h1 class="card-title">{{ med.name }}</h1>
         <p>Amount:<span class="align-right">{{ med.amount }}</span></p>
-        <p>Datetime:<span class="align-right">{{ med.datetime.join(', ') }}</span></p>
-        <p>Frequency:<span class="align-right">{{ med.frequency }}</span></p>
+        <p>Datetime:<span class="align-right">{{ med.dateTime }}</span></p>
+        <p>Frequency:<span class="align-right">{{ med.type }}</span></p>
       </div>
     </div>
 

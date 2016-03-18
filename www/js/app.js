@@ -1,16 +1,9 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
 var app = angular.module('starter', ['ionic', 'ngCordova', 'ngStorage', 'ui.router']);
-var db = null;
 
 app.run(function($ionicPlatform, $cordovaSQLite, $rootScope, $http) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
+
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 
       // Don't remove this line unless you know what you are doing. It stops the viewport
@@ -47,18 +40,27 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: 'templates/editPill.html',
       controller: 'editPill',
     })
+    // for contact
+    .state('contact', {
+      url: '/contact',
+      templateUrl: 'templates/contact.html',
+      controller: 'editPill',
+    })
 
 });
 
 
-app.service('Medications', function ($http, $q){
-  var defferer = $q.defer();
-  $http.get('db.json').then(function (data) {
-    defferer.resolve(data);
-  });
+// for the noSQL db
+app.factory('pouchdb', function() {
+  return new PouchDB('appDB'); // to use the DB
 
-  this.getMedications = function () {
-    return defferer.promise;
-  }
+  /* Uncomment these lines to delete DB
+  db = new PouchDB('appDB');
+  db.destroy().then(function (){
+    console.log('db destroyed');
+  }, function(){
+    console.log('error destroying db');
+  });
+  */
 
 });
