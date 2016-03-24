@@ -24,24 +24,28 @@ app.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
     // for main page
     .state('app', {
+      cache: false,
       url: '/',
       templateUrl: 'templates/home.html',
       controller: 'index'
     })
     // for addPill view
     .state('addPill', {
+      cache: false,
       url: '/addPill',
       templateUrl: 'templates/addPill.html',
       controller: 'addPill',
     })
     // for editPill view
     .state('editPill', {
+      cache: false,
       url: '/editPill/:id',
       templateUrl: 'templates/editPill.html',
       controller: 'editPill',
     })
     // for contact
     .state('contact', {
+      cache: false,
       url: '/contact',
       templateUrl: 'templates/contact.html',
       controller: 'editPill',

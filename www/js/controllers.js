@@ -1,4 +1,4 @@
-app.controller('index', function ($scope, $stateParams, $ionicActionSheet, $cordovaSms, pouchdb, contactdb) {
+app.controller('index', function ($scope, $state, $stateParams, $ionicActionSheet, $cordovaSms, pouchdb, contactdb) {
   contactdb.put({
     _id: 'contact',
     number: '9145257507'
@@ -47,7 +47,7 @@ app.controller('index', function ($scope, $stateParams, $ionicActionSheet, $cord
         alert('Error');
         console.log('An error occurred');
       });
-  };
+    };
 });
 
 
@@ -60,7 +60,7 @@ app.controller('index', function ($scope, $stateParams, $ionicActionSheet, $cord
 
 
 
-app.controller('addPill', function ($scope, $stateParams, $ionicActionSheet, $cordovaSms, pouchdb, contactdb) {
+app.controller('addPill', function ($scope, $state, $stateParams, $ionicActionSheet, $cordovaSms, pouchdb, contactdb) {
 
   // get medications from PouchDB
   $scope.Medications = [];
@@ -109,6 +109,10 @@ app.controller('addPill', function ($scope, $stateParams, $ionicActionSheet, $co
       });
     };
 
+    $scope.back = function () {
+      $state.go('app', {}, {reload: true});
+    };
+
   }); // NOTE: These braces belong to pouchdb.allDocs({}).then(...)
   // I don't know why this is, just go with it...
 });
@@ -123,7 +127,7 @@ app.controller('addPill', function ($scope, $stateParams, $ionicActionSheet, $co
 
 
 
-app.controller('editPill', function ($scope, $stateParams, $ionicActionSheet, $cordovaSms, pouchdb, contactdb) {
+app.controller('editPill', function ($scope, $state, $stateParams, $ionicActionSheet, $cordovaSms, pouchdb, contactdb) {
   // get medications from PouchDB
   $scope.Medications = [];
   pouchdb.allDocs({include_docs: true}).then(function (result) {
@@ -174,6 +178,9 @@ app.controller('editPill', function ($scope, $stateParams, $ionicActionSheet, $c
        });
      };
 
+     $scope.addPill = function () {
+       $state.go('app', {}, {reload: true});
+     };
 
   }); // NOTE: These braces belong to pouchdb.allDocs({}).then(...)
       // Before all Hell gets loose, just listen to my advice... LEAVE THE BRACES!!!
