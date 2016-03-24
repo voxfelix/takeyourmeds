@@ -1,6 +1,6 @@
-var app = angular.module('starter', ['ionic', 'ngCordova', 'ngStorage', 'ui.router']);
+var app = angular.module('starter', ['ionic', 'ngCordova', 'ui.router']);
 
-app.run(function($ionicPlatform, $cordovaSQLite, $rootScope, $http) {
+app.run(function($ionicPlatform, $rootScope, $http) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
 

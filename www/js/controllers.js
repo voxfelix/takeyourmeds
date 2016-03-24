@@ -1,4 +1,4 @@
-app.controller('index', function ($scope, $cordovaCalendar, pouchdb) {
+app.controller('index', function ($scope, $ionicActionSheet, pouchdb) {
   // get medications from PouchDB
   $scope.Medications = [];
   pouchdb.allDocs({include_docs: true}).then(function (result) {
@@ -8,12 +8,12 @@ app.controller('index', function ($scope, $cordovaCalendar, pouchdb) {
     $scope.$apply();
     console.log($scope.Medications);
   });
-
 });
 
 
 
-app.controller('addPill', function ($scope, $stateParams, $cordovaCalendar, pouchdb) {
+app.controller('addPill', function ($scope, $stateParams, $ionicActionSheet, pouchdb) {
+
   // get medications from PouchDB
   $scope.Medications = [];
   pouchdb.allDocs({include_docs: true}).then(function (result) {
@@ -39,7 +39,7 @@ app.controller('addPill', function ($scope, $stateParams, $cordovaCalendar, pouc
 
     // for medData object to put into $scope.submit
     $scope.new_id = $scope.getId($scope.Medications);
-    // $scope.new_id = '1111';
+
     $scope.medData = {
       _id: $scope.new_id,
       id: $scope.new_id,
@@ -66,7 +66,7 @@ app.controller('addPill', function ($scope, $stateParams, $cordovaCalendar, pouc
 });
 
 
-app.controller('editPill', function ($scope, $stateParams, $cordovaCalendar, pouchdb) {
+app.controller('editPill', function ($scope, $stateParams, $ionicActionSheet, pouchdb) {
   // get medications from PouchDB
   $scope.Medications = [];
   pouchdb.allDocs({include_docs: true}).then(function (result) {
@@ -80,7 +80,8 @@ app.controller('editPill', function ($scope, $stateParams, $cordovaCalendar, pou
     for (var i = 0; i < $scope.Medications.length; i++) {
       if ($scope.Medications[i].id == $scope.current_med) {
         $scope.medData = $scope.Medications[i];
-        console.log($scope.medData);
+        console.log($scope.medData._id);
+        $scope.id = $scope.medData.id;
       };
     };
 
@@ -88,12 +89,36 @@ app.controller('editPill', function ($scope, $stateParams, $cordovaCalendar, pou
       pouchdb.put(
         $scope.medData
       ).then(function (res) {
-        console.log('Updated ', $scope.medData[id], ' doc');
+        console.log('Updated ', $scope.medData.id, ' doc');
       }, function (error) {
         console.log('Failed updating doc');
         console.log(error);
       });
     };
+
+    // Show the action sheet
+    $scope.showActionSheet = function() {
+     var hideSheet = $ionicActionSheet.show({
+
+         buttons: [
+           { text: '<a href="#" onclick="window.open(\'http://www.reptilemagazine.com\', \'_system\');">Open a Browser</a>'}
+         ],
+         destructiveText: 'Delete',
+         cancelText: 'Cancel',
+         destructiveButtonClicked: function() {
+           console.log($scope.medData);
+           pouchdb.get($scope.medData._id).then(function (doc) {
+              return pouchdb.remove(doc);
+              console.log('Deleted doc ' + $scope.id);
+            });
+          },
+         buttonClicked: function(index) {
+           return true;
+         }
+         
+       });
+     };
+
 
   }); // NOTE: These braces belong to pouchdb.allDocs({}).then(...)
       // Before all Hell gets loose, just listen to my advice... LEAVE THE BRACES!!!

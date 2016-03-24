@@ -15,12 +15,27 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 
+$bar-height:                      70px !default;
+$bar-android-title-font-size:     30px !default;
+
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
+
+.platform-android .bar {
+  .title {
+    font-size: $bar-android-title-font-size * .9;
+  }
+
+  .button {
+    font-size: $bar-android-title-font-size * .6;
+    height: 70px;
+  }
+}
+
 
 .card {
   border-top: 4px solid $calm;
@@ -50,13 +65,26 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   color: $positive;
 }
 
+.medication, .supplement {
+  border-top: 4px solid $positive;
+
+  h1 {
+    color: $positive;
+    font-size: 1.7em;
+    font-weight: 400;
+    text-transform: capitalize;
+  }
+
+  p {
+    font-size: 1.1em;
+  }
+}
+
 .medication {
   border-top: 4px solid $positive;
 
   h1 {
     color: $positive;
-    font-size: 1.2em;
-    font-weight: 400;
   }
 }
 
@@ -65,7 +93,5 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
   h1 {
     color: $assertive;
-    font-size: 1.2em;
-    font-weight: 400;
   }
 }

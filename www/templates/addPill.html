@@ -29,7 +29,7 @@
 
     <label class="item item-input">
       <span class="input-label">Amount</span>
-      <input type="number" ng-model="medData.amount">
+      <input type="number" min="1" max="20" ng-model="medData.amount">
     </label>
 
     <input class="addpill-submit button button-block button-positive col col-90" type="submit" ng-click="submit()"></input>
