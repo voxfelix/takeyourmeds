@@ -3928,7 +3928,7 @@ a.subdued {
       background-image: linear-gradient(180deg, #b2b2b2, #b2b2b2 50%, transparent 50%); }
   .bar.bar-positive {
     border-color: #0c60ee;
-    background-color: #387ef5;
+    background-color: #5E5293;
     background-image: linear-gradient(0deg, #0c60ee, #0c60ee 50%, transparent 50%);
     color: #fff; }
     .bar.bar-positive .title {
@@ -6585,7 +6585,7 @@ button.item.item-button-right {
 .card {
   padding-top: 1px;
   padding-bottom: 1px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3); }
   .card .item {
     border-left: 0;
     border-right: 0; }
@@ -9737,22 +9737,28 @@ a.button {
   font-size: 1.6em; }
 
 .add-button {
-  font-size: 3em;
+  font-size: 5em;
   position: fixed;
   bottom: 10px;
-  right: 10px;
-  color: #387ef5; }
+  right: 18px;
+  color: #5E5293; }
 
 .medication {
-  border-top: 4px solid #387ef5; }
+  border-top: 4px solid #5E5293; }
+  .medication p{
+      font-size: 1.2em;
+    }
   .medication h1 {
-    color: #387ef5;
-    font-size: 1.2em;
+    color: #5E5293;
+    font-size: 2.4em;
     font-weight: 400; }
 
 .supplement {
-  border-top: 4px solid #ef473a; }
+  border-top: 4px solid #932536; }
+  .supplement p{
+      font-size: 1.2em;
+    }
   .supplement h1 {
-    color: #ef473a;
-    font-size: 1.2em;
+    color: #932536;
+    font-size: 2.4em;
     font-weight: 400; }
