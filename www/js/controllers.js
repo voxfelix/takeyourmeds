@@ -1,18 +1,66 @@
-app.controller('index', function ($scope, $ionicActionSheet, pouchdb) {
+app.controller('index', function ($scope, $stateParams, $ionicActionSheet, $cordovaSms, pouchdb, contactdb) {
+  contactdb.put({
+    _id: 'contact',
+    number: '9145257507'
+  }).then(function() {
+    // alert('good');
+  }, function () {
+    // alert('bad');
+  });
+
   // get medications from PouchDB
   $scope.Medications = [];
   pouchdb.allDocs({include_docs: true}).then(function (result) {
     for (var i = 0; i < result.rows.length; i++) { // for var in object.rows
       $scope.Medications.push(result.rows[i].doc);
     };
+
     $scope.$apply();
     console.log($scope.Medications);
   });
+
+  // get contact details
+  $scope.contact = {};
+  contactdb.allDocs({include_docs: true}).then(function (result) {
+    $scope.contact = result.rows[0].doc;
+    $scope.$apply();
+    console.log($scope.contact);
+  });
+
+  $scope.sendSms = function () {
+
+    var options = {
+      replaceLineBreaks: false, // true to replace \n by a new line, false by default
+      android: {
+        intent: '' // send SMS with the native android SMS messaging
+      }
+    };
+
+   $scope.textMessage = 'test message';
+
+    $cordovaSms
+      .send($scope.contact.number, $scope.textMessage, options)
+      .then(function() {
+        alert('Success');
+        console.log('Success! SMS was sent');
+      }, function(error) {
+        alert('Error');
+        console.log('An error occurred');
+      });
+  };
 });
 
 
 
-app.controller('addPill', function ($scope, $stateParams, $ionicActionSheet, pouchdb) {
+
+
+
+
+
+
+
+
+app.controller('addPill', function ($scope, $stateParams, $ionicActionSheet, $cordovaSms, pouchdb, contactdb) {
 
   // get medications from PouchDB
   $scope.Medications = [];
@@ -66,7 +114,16 @@ app.controller('addPill', function ($scope, $stateParams, $ionicActionSheet, pou
 });
 
 
-app.controller('editPill', function ($scope, $stateParams, $ionicActionSheet, pouchdb) {
+
+
+
+
+
+
+
+
+
+app.controller('editPill', function ($scope, $stateParams, $ionicActionSheet, $cordovaSms, pouchdb, contactdb) {
   // get medications from PouchDB
   $scope.Medications = [];
   pouchdb.allDocs({include_docs: true}).then(function (result) {
@@ -100,9 +157,7 @@ app.controller('editPill', function ($scope, $stateParams, $ionicActionSheet, po
     $scope.showActionSheet = function() {
      var hideSheet = $ionicActionSheet.show({
 
-         buttons: [
-           { text: '<a href="#" onclick="window.open(\'http://www.reptilemagazine.com\', \'_system\');">Open a Browser</a>'}
-         ],
+         buttons: [],
          destructiveText: 'Delete',
          cancelText: 'Cancel',
          destructiveButtonClicked: function() {
@@ -115,7 +170,7 @@ app.controller('editPill', function ($scope, $stateParams, $ionicActionSheet, po
          buttonClicked: function(index) {
            return true;
          }
-         
+
        });
      };
 
@@ -123,3 +178,15 @@ app.controller('editPill', function ($scope, $stateParams, $ionicActionSheet, po
   }); // NOTE: These braces belong to pouchdb.allDocs({}).then(...)
       // Before all Hell gets loose, just listen to my advice... LEAVE THE BRACES!!!
 });
+
+
+
+
+
+
+
+
+//
+// app.controller('editPill', function ($scope, $ionicActionSheet, $cordovaSms, pouchdb, contactdb) {
+//
+// });

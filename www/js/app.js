@@ -50,9 +50,24 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 });
 
 
-// for the noSQL db
+// for the noSQL db - medications
 app.factory('pouchdb', function() {
   return new PouchDB('appDB'); // to use the DB
+
+  /* Uncomment these lines to delete DB
+  db = new PouchDB('appDB');
+  db.destroy().then(function (){
+    console.log('db destroyed');
+  }, function(){
+    console.log('error destroying db');
+  });
+  */
+
+});
+
+// for the noSQL db - contact
+app.factory('contactdb', function() {
+  return new PouchDB('contactdb'); // to use the DB
 
   /* Uncomment these lines to delete DB
   db = new PouchDB('appDB');

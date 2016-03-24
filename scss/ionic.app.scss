@@ -7,16 +7,14 @@ For example, you might change some of the default colors:
 
 $light:                           #fff !default;
 $stable:                          #f8f8f8 !default;
-$positive:                        #387ef5 !default;
+$positive:                        #673AB7 !default;
 $calm:                            #11c1f3 !default;
 $balanced:                        #33cd5f !default;
 $energized:                       #ffc900 !default;
 $assertive:                       #ef473a !default;
-$royal:                           #886aea !default;
+$royal:                           #5E5293 !default;
 $dark:                            #444 !default;
 
-$bar-height:                      70px !default;
-$bar-android-title-font-size:     30px !default;
 
 
 // The path for our ionicons font files, relative to the built CSS in www/css
@@ -25,73 +23,18 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
-.platform-android .bar {
-  .title {
-    font-size: $bar-android-title-font-size * .9;
-  }
-
-  .button {
-    font-size: $bar-android-title-font-size * .6;
-    height: 70px;
-  }
-}
-
-
-.card {
-  border-top: 4px solid $calm;
-}
-
-.addpill-submit, .editpill-save {
-  margin: auto;
-}
-
-.popup {
-  opacity: 1.0;
-}
-
-.align-right {
-  float: right;
-}
-
-.settings-button {
-  font-size: 1.6em;
-}
-
 .add-button {
   font-size: 3em;
   position: fixed;
   bottom: 10px;
   right: 10px;
-  color: $positive;
+  color: #673AB7;
 }
 
-.medication, .supplement {
-  border-top: 4px solid $positive;
-
-  h1 {
-    color: $positive;
-    font-size: 1.7em;
-    font-weight: 400;
-    text-transform: capitalize;
-  }
-
-  p {
-    font-size: 1.1em;
-  }
-}
-
-.medication {
-  border-top: 4px solid $positive;
-
-  h1 {
-    color: $positive;
-  }
-}
-
-.supplement {
-  border-top: 4px solid $assertive;
-
-  h1 {
-    color: $assertive;
-  }
+.smsbtn {
+  font-size: 3em;
+  color: #673AB7;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
 }

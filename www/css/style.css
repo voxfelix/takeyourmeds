@@ -1,1 +1,60 @@
 /* Empty. Add your own CSS if you like */
+
+.medication {
+  border-top: 6px solid #673AB7;
+}
+.medication p {
+  font-size: 1.2em;
+}
+.medication h1 {
+  color: #673AB7;
+  font-size: 2.4em;
+  font-weight: 400;
+}
+.supplement {
+  border-top: 6px solid #ff4081;
+}
+.supplement p {
+  font-size: 1.2em;
+}
+.supplement h1 {
+  color: #ff4081;
+  font-size: 2.4em;
+  font-weight: 400;
+}
+.bar.bar-stable {
+  border-color: #673AB7;
+  background-color: #673AB7;
+  background-image: linear-gradient(0deg, #673AB7, #673AB7 50%, transparent 50%);
+  color: #444;
+}
+.bar.bar-stable .title {
+  color: #444;
+}
+.bar.bar-stable.bar-footer {
+  background-image: linear-gradient(180deg, #673AB7, #673AB7 50%, transparent 50%);
+}
+.bar.bar-positive .title {
+  color: #fff;
+}
+.bar.bar-positive.bar-footer {
+  background-image: linear-gradient(180deg, #673AB7, #673AB7 50%, transparent 50%);
+}
+.add-button {
+  font-size: 3em;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  color: #673AB7;
+}
+.smsbtn {
+  font-size: 3em;
+  color: #673AB7;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+}
+
+.align-right {
+  float: right;
+}
