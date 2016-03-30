@@ -1,4 +1,4 @@
-var app = angular.module('starter', ['ionic', 'ngCordova', 'ui.router']);
+var app = angular.module('starter', ['ionic', 'ngCordova', 'ui.router', 'ion-datetime-picker']);
 
 app.run(function($ionicPlatform, $rootScope, $http) {
 	$ionicPlatform.ready(function() {

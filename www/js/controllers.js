@@ -89,6 +89,16 @@ app.controller('addPill', function($scope, $state, $stateParams, $ionicActionShe
 			return val;
 		};
 
+        // $scope.getFrequency(datetime, freq) | ['every day', 'every second day', 'every third day' ... 'weekly', 'biweekly']
+        $scope.getFrequency = function (datetime, freq) {
+            var array = [];
+            array.push(datetime);
+            if (freq = 'every day') {
+                array.push(new Date().setDate(datetime.getDate() + 1).toString());
+            };
+            console.log(array);
+        };
+
 		// for medData object to put into $scope.submit
 		$scope.new_id = $scope.getId($scope.Medications);
 
@@ -98,7 +108,8 @@ app.controller('addPill', function($scope, $state, $stateParams, $ionicActionShe
 			name: null,
 			amount: null,
 			type: null,
-			dateTime: null
+			dateTime: null,
+            frequency: $scope.getFrequency(new Date(), 'every day')
 		};
 
 		// to submit a pill

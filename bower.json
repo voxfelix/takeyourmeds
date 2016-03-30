@@ -3,5 +3,9 @@
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.2.4"
+  },
+  "dependencies": {
+    "ionic-datepicker": "^1.0.0",
+    "ion-datetime-picker": "^0.1.2"
   }
 }

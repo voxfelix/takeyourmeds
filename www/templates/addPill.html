@@ -22,9 +22,12 @@
         </select>
       </label>
 
-      <label class="item item-input">
-        <span class="input-label">Time</span>
-        <input type="time" ng-model="medData.dateTime">
+      <label class="item item-input" ion-datetime-picker ng-model="medData.dateTime">
+        <span class="input-label">DateTime</span>
+        <div>
+            <i class="icon ion-ios-calendar positive"></i>
+            <strong>{{medData.dateTime}}</strong>
+        </div>
       </label>
 
       <label class="item item-input">
