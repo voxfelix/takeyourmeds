@@ -1,11 +1,8 @@
-app.controller('index', function($scope, $state, $stateParams, $ionicActionSheet, $cordovaSms, pouchdb, contactdb) {
-	contactdb.put({
-		_id: 'contact',
-		number: '9145257507'
-	}).then(function() {
-		// alert('good');
-	}, function() {
-		// alert('bad');
+app.controller('index', function($scope, $state, $stateParams, $ionicActionSheet, $cordovaSms, $cordovaContacts, pouchdb, contactdb) {
+	contactdb.get('contact').then(function(result) {
+		console.log('sucuess in contact');
+	}, function(error) {
+		console.log('error in loading contact: ', error);
 	});
 
 	// get medications from PouchDB
@@ -62,13 +59,14 @@ app.controller('index', function($scope, $state, $stateParams, $ionicActionSheet
 
 
 
-app.controller('addPill', function($scope, $state, $stateParams, $ionicActionSheet, $cordovaSms, pouchdb, contactdb) {
+app.controller('addPill', function($scope, $state, $stateParams, $ionicActionSheet, $cordovaSms, $cordovaContacts, pouchdb, contactdb) {
 
 	// get medications from PouchDB
 	$scope.Medications = [];
 	pouchdb.allDocs({
 		include_docs: true
 	}).then(function(result) {
+
 		for (var i = 0; i < result.rows.length; i++) { // for var in object.rows
 			$scope.Medications.push(result.rows[i].doc);
 		};
@@ -89,15 +87,15 @@ app.controller('addPill', function($scope, $state, $stateParams, $ionicActionShe
 			return val;
 		};
 
-        // $scope.getFrequency(datetime, freq) | ['every day', 'every second day', 'every third day' ... 'weekly', 'biweekly']
-        $scope.getFrequency = function (datetime, freq) {
-            var array = [];
-            array.push(datetime);
-            if (freq = 'every day') {
-                array.push(new Date().setDate(datetime.getDate() + 1).toString());
-            };
-            console.log(array);
-        };
+		// $scope.getFrequency(datetime, freq) | ['every day', 'every second day', 'every third day' ... 'weekly', 'biweekly']
+		$scope.getFrequency = function(datetime, freq) {
+			var array = [];
+			array.push(datetime);
+			if (freq = 'every day') {
+				array.push(new Date().setDate(datetime.getDate() + 1).toString());
+			};
+			console.log(array);
+		};
 
 		// for medData object to put into $scope.submit
 		$scope.new_id = $scope.getId($scope.Medications);
@@ -109,7 +107,7 @@ app.controller('addPill', function($scope, $state, $stateParams, $ionicActionShe
 			amount: null,
 			type: null,
 			dateTime: null,
-            frequency: $scope.getFrequency(new Date(), 'every day')
+			frequency: $scope.getFrequency(new Date(), 'every day')
 		};
 
 		// to submit a pill
@@ -118,9 +116,15 @@ app.controller('addPill', function($scope, $state, $stateParams, $ionicActionShe
 				$scope.medData
 			).then(function() {
 				console.log('PouchDB doc created with _id: ', $scope.medData._id);
+                $state.go('app', {}, {
+    				reload: true
+    			});
 			}).catch(function(error) {
 				console.log('Error creating PouchDB doc');
 				console.log(error);
+                $state.go('app', {}, {
+    				reload: true
+    			});
 			});
 		};
 
@@ -142,7 +146,7 @@ app.controller('addPill', function($scope, $state, $stateParams, $ionicActionShe
 
 
 
-app.controller('editPill', function($scope, $state, $stateParams, $ionicActionSheet, $cordovaSms, pouchdb, contactdb) {
+app.controller('editPill', function($scope, $state, $stateParams, $ionicActionSheet, $cordovaSms, $cordovaContacts, pouchdb, contactdb) {
 	// get medications from PouchDB
 	$scope.Medications = [];
 	pouchdb.allDocs({
@@ -168,9 +172,15 @@ app.controller('editPill', function($scope, $state, $stateParams, $ionicActionSh
 				$scope.medData
 			).then(function(res) {
 				console.log('Updated ', $scope.medData.id, ' doc');
+                $state.go('app', {}, {
+    				reload: true
+    			});
 			}, function(error) {
 				console.log('Failed updating doc');
 				console.log(error);
+                $state.go('app', {}, {
+    				reload: true
+    			});
 			});
 		};
 
@@ -195,12 +205,6 @@ app.controller('editPill', function($scope, $state, $stateParams, $ionicActionSh
 			});
 		};
 
-		$scope.addPill = function() {
-			$state.go('app', {}, {
-				reload: true
-			});
-		};
-
 	}); // NOTE: These braces belong to pouchdb.allDocs({}).then(...)
 	// Before all Hell gets loose, just listen to my advice... LEAVE THE BRACES!!!
 });
@@ -212,7 +216,35 @@ app.controller('editPill', function($scope, $state, $stateParams, $ionicActionSh
 
 
 
-//
-// app.controller('editPill', function ($scope, $ionicActionSheet, $cordovaSms, pouchdb, contactdb) {
-//
-// });
+
+app.controller('contacts', function($scope, $state, $stateParams, $ionicActionSheet, $cordovaSms, $cordovaContacts, pouchdb, contactdb) {
+
+    $scope.$on('$ionicView.enter', function () {
+        $scope.chooseContact();
+    });
+
+    $scope.chooseContact = function () {
+        $cordovaContacts.pickContact().then(function (contactPicked) {
+            $scope.contact._id  = 'contact';
+            $scope.contact.name = contactPicked.displayName;
+            $scope.contact.number = contactPicked.phoneNumbers[0].value;
+        });
+    }
+
+    $scope.submit = function () {
+        contactdb.put(
+            $scope.contact
+        ).then(function(res) {
+            console.log('Added contact');
+            $state.go('app', {}, {
+				reload: true
+			});
+        }, function(error) {
+            console.log('Failed to add contact');
+            console.log(error);
+            $state.go('app', {}, {
+				reload: true
+			});
+        });
+    };
+});

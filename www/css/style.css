@@ -70,3 +70,12 @@
 .align-right {
   float: right;
 }
+
+.big-text {
+    font-size: 2em;
+    display: block;
+}
+
+.small-text {
+    font-size: .8em;
+}

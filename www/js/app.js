@@ -44,11 +44,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			controller: 'editPill',
 		})
 		// for contact
-		.state('contact', {
+		.state('contacts', {
 			cache: false,
-			url: '/contact',
-			templateUrl: 'templates/contact.html',
-			controller: 'editPill',
+			url: '/contacts',
+			templateUrl: 'templates/contacts.html',
+			controller: 'contacts',
 		})
 
 });
