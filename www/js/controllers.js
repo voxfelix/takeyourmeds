@@ -247,4 +247,10 @@ app.controller('contacts', function($scope, $state, $stateParams, $ionicActionSh
 			});
         });
     };
+
+    $scope.back = function() {
+        $state.go('app', {}, {
+            reload: true
+        });
+    };
 });
