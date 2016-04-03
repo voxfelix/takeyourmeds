@@ -11,23 +11,40 @@
 
       <label class="item item-input">
         <span class="input-label">Medication</span>
-        <input type="text" placeholder="Name of Medication" ng-model="medData.name" class="align-right"/>
+        <input type="text" placeholder="Name of Medication" ng-model="medData.name" class="align-right" />
       </label>
 
       <label class="item item-input item-select">
-        <span class="input-label alignr-right">Type</span>
+        <span class="input-label align-right">Type</span>
         <select ng-model="medData.type">
           <option>Medication</option>
           <option>Supplement</option>
         </select>
       </label>
 
-      <label class="item item-input" ion-datetime-picker ng-model="medData.dateTime">
-        <span class="input-label">DateTime</span>
+      <label class="item item-input" ion-datetime-picker date am-pm ng-model="medData.date">
+        <span class="input-label">Date</span>
         <div>
-            <i class="icon ion-ios-calendar positive"></i>
-            <strong>{{medData.dateTime}}</strong>
+          <i class="icon ion-ios-calendar positive"></i>
+          <strong>{{ medData.date }}</strong>
         </div>
+      </label>
+
+      <label class="item item-input" ion-datetime-picker time ng-model="medData.time">
+        <span class="input-label">Time</span>
+        <div>
+          <i class="icon ion-clock positive"></i>
+          <strong>{{ medData.time }}</strong>
+        </div>
+      </label>
+
+      <label class="item item-input item-select">
+        <span class="input-label align-right">Frequency</span>
+        <select ng-model="medData.repeat">
+          <option>Every Day</option>
+          <option>Once a week</option>
+          <option>Every two weeks</option>
+        </select>
       </label>
 
       <label class="item item-input">

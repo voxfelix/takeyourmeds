@@ -106,8 +106,9 @@ app.controller('addPill', function($scope, $state, $stateParams, $ionicActionShe
 			name: null,
 			amount: null,
 			type: null,
-			dateTime: null,
-			frequency: $scope.getFrequency(new Date(), 'every day')
+			date: null,
+            time: null,
+			repeat: null
 		};
 
 		// to submit a pill
