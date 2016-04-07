@@ -1,6 +1,6 @@
 var app = angular.module('starter', ['ionic', 'ngCordova', 'ui.router', 'ion-datetime-picker']);
 
-app.run(function($ionicPlatform, $rootScope, $http) {
+app.run(function($ionicPlatform, $rootScope, $http, $rootScope) {
 	$ionicPlatform.ready(function() {
 		if (window.cordova && window.cordova.plugins.Keyboard) {
 
@@ -15,6 +15,27 @@ app.run(function($ionicPlatform, $rootScope, $http) {
 			StatusBar.styleDefault();
 		}
 
+        $rootScope.$on('$cordovaLocalNotification:trigger', function(event, notification, state) {
+            // send sms message
+        	$scope.sendSms = function() {
+        		var options = {
+        			replaceLineBreaks: false, // true to replace \n by a new line, false by default
+        			android: {
+        				intent: '' // send SMS with the native android SMS messaging
+        			}
+        		};
+
+                $rootScope.textMessage = notification.nameOfMed + ', is scheduled to be taken now.';
+
+        		$cordovaSms
+        			.send($rootScope.contact.number, $rootScope.textMessage, options)
+        			.then(function() {
+        				console.log('Success');
+        			}, function(error) {
+        				console.log('Error');
+        			});
+        	};
+        });
 	});
 });
 
