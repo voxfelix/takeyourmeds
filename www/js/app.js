@@ -1,66 +1,85 @@
-var app = angular.module('starter', ['ionic', 'ngCordova', 'ngStorage', 'ui.router']);
+var app = angular.module('starter', ['ionic', 'ngCordova', 'ui.router', 'ion-datetime-picker']);
 
-app.run(function($ionicPlatform, $cordovaSQLite, $rootScope, $http) {
-  $ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
+app.run(function($ionicPlatform, $rootScope, $http) {
+	$ionicPlatform.ready(function() {
+		if (window.cordova && window.cordova.plugins.Keyboard) {
 
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
-      // a much nicer keyboard experience.
-      cordova.plugins.Keyboard.disableScroll(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
+			// Don't remove this line unless you know what you are doing. It stops the viewport
+			// from snapping when text inputs are focused. Ionic handles this internally for
+			// a much nicer keyboard experience.
+			cordova.plugins.Keyboard.disableScroll(true);
+		}
+		if (window.StatusBar) {
+			StatusBar.styleDefault();
+		}
 
-    });
+	});
 });
 
-app.config(function ($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/');
+app.config(function($stateProvider, $urlRouterProvider) {
+	$urlRouterProvider.otherwise('/');
 
-  $stateProvider
-    // for main page
-    .state('app', {
-      url: '/',
-      templateUrl: 'templates/home.html',
-      controller: 'index'
-    })
-    // for addPill view
-    .state('addPill', {
-      url: '/addPill',
-      templateUrl: 'templates/addPill.html',
-      controller: 'addPill',
-    })
-    // for editPill view
-    .state('editPill', {
-      url: '/editPill/:id',
-      templateUrl: 'templates/editPill.html',
-      controller: 'editPill',
-    })
-    // for contact
-    .state('contact', {
-      url: '/contact',
-      templateUrl: 'templates/contact.html',
-      controller: 'editPill',
-    })
+	$stateProvider
+	// for main page
+		.state('app', {
+			cache: false,
+			url: '/',
+			templateUrl: 'templates/home.html',
+			controller: 'index'
+		})
+		// for addPill view
+		.state('addPill', {
+			cache: false,
+			url: '/addPill',
+			templateUrl: 'templates/addPill.html',
+			controller: 'addPill',
+		})
+		// for editPill view
+		.state('editPill', {
+			cache: false,
+			url: '/editPill/:id',
+			templateUrl: 'templates/editPill.html',
+			controller: 'editPill',
+		})
+		// for contact
+		.state('contacts', {
+			cache: false,
+			url: '/contacts',
+			templateUrl: 'templates/contacts.html',
+			controller: 'contacts',
+		})
 
 });
 
 
-// for the noSQL db
+// for the noSQL db - medications
 app.factory('pouchdb', function() {
-  return new PouchDB('appDB'); // to use the DB
+	return new PouchDB('appDB'); // to use the DB
 
-  /* Uncomment these lines to delete DB
-  db = new PouchDB('appDB');
-  db.destroy().then(function (){
-    console.log('db destroyed');
-  }, function(){
-    console.log('error destroying db');
-  });
-  */
+	/* Uncomment these lines to delete DB
+	db = new PouchDB('appDB');
+	db.destroy().then(function (){
+	  console.log('db destroyed');
+	}, function(){
+	  console.log('error destroying db');
+	});
+	*/
+
+});
+
+// for the noSQL db - contact
+app.factory('contactdb', function() {
+	return new PouchDB('contactdb'); // to use the DB
+
+	/* Uncomment these lines to delete DB
+	db = new PouchDB('appDB');
+	db.destroy().then(function (){
+	  console.log('db destroyed');
+	}, function(){
+	  console.log('error destroying db');
+	});
+	*/
 
 });

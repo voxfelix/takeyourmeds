@@ -2,7 +2,7 @@
 
   <ion-header-bar class="bar-stable bar-positive">
     <h1 class="title">Take Your Meds</h1>
-    <button class="button"><i class="ionicons ion-android-settings settings-button"></i></button>
+    <button class="icon ion-gear-a button button-clear"></button>
   </ion-header-bar>
 
   <ion-content>
@@ -10,14 +10,15 @@
     <div class="card" ui-sref="editPill({ id: med.id })" ng-repeat="med in Medications" ng-class="{supplement: med.type == 'Supplement', medication: med.type == 'Medication'}">
       <div class="item item-text-wrap">
         <h1 class="card-title">{{ med.name }}</h1>
-        <p>Amount:<span class="align-right">{{ med.amount }}</span></p>
-        <p>Datetime:<span class="align-right">{{ med.dateTime }}</span></p>
-        <p>Frequency:<span class="align-right">{{ med.type }}</span></p>
+        <p class="whatever">Amount:<span class="align-right">{{ med.amount }}</span></p>
+        <p class="whatever">Datetime:<span class="align-right">{{ med.dateTime }}</span></p>
+        <p class="whatever">Frequency:<span class="align-right">{{ med.type }}</span></p>
       </div>
     </div>
 
   </ion-content>
 
-  <button class="button" ui-sref="addPill"><i class="icons ion-android-add-circle add-button"></i></button>
+  <button class="button" ui-sref="addPill()"><i class="icons ion-android-add-circle add-button"></i></button>
+  <button class="button" ng-click="sendSms()"><i class="icons ion-ionic smsbtn"></i></button>
 
 </ion-pane>

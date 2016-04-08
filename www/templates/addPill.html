@@ -1,41 +1,44 @@
-<ion-pane  ng-controller="addPill">
+<ion-pane ng-controller="addPill">
 
-<ion-header-bar class="bar-stable bar-positive">
-  <ionic-nav-back-button class="button button-clear" ui-sref="app"><i class="ion-arrow-left-c"></i> Back</ionic-nav-back-button>
-  <h1 class="title">Add A Medication</h1>
-</ion-header-bar>
+  <ion-header-bar class="bar-stable bar-positive">
+    <ionic-nav-back-button class="button button-clear" ng-click="back()"><i class="ion-arrow-left-c"></i> Back</ionic-nav-back-button>
+    <h1 class="title title-center">Add A Medication</h1>
+  </ion-header-bar>
 
-<ion-content>
+  <ion-content>
 
-  <div class="list">
+    <div class="list">
 
-    <label class="item item-input">
-      <span class="input-label">Medication</span>
-      <input type="text" placeholder="Medication" ng-model="medData.name"/>
-    </label>
+      <label class="item item-input">
+        <span class="input-label">Medication</span>
+        <input type="text" placeholder="Medication" ng-model="medData.name" />
+      </label>
 
-    <label class="item item-input item-select">
-      <span class="input-label">Type</span>
-      <select ng-model="medData.type">
-        <option>Medication</option>
-        <option>Supplement</option>
-      </select>
-    </label>
+      <label class="item item-input item-select">
+        <span class="input-label">Type</span>
+        <select ng-model="medData.type">
+          <option>Medication</option>
+          <option>Supplement</option>
+        </select>
+      </label>
 
-    <label class="item item-input">
-      <span class="input-label">Time</span>
-      <input type="time" ng-model="medData.dateTime">
-    </label>
+      <label class="item item-input" ion-datetime-picker ng-model="medData.dateTime">
+        <span class="input-label">DateTime</span>
+        <div>
+            <i class="icon ion-ios-calendar positive"></i>
+            <strong>{{medData.dateTime}}</strong>
+        </div>
+      </label>
 
-    <label class="item item-input">
-      <span class="input-label">Amount</span>
-      <input type="number" ng-model="medData.amount">
-    </label>
+      <label class="item item-input">
+        <span class="input-label">Amount</span>
+        <input type="number" min="1" max="20" ng-model="medData.amount">
+      </label>
 
-    <input class="addpill-submit button button-block button-positive col col-90" type="submit" ng-click="submit()"></input>
+      <input class="addpill-submit button button-block button-positive col col-90" type="submit" ng-click="submit()"></input>
 
-  </div>
+    </div>
 
-</ion-content>
+  </ion-content>
 
 </ion-pane>
