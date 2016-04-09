@@ -41,20 +41,16 @@
       <label class="item item-input item-select">
         <span class="input-label align-right">Frequency</span>
         <select ng-model="medData.repeat">
-          <option>Daily</option>
-          <option>Weekly</option>
-          <option>Monthly</option>
+          <option>day</option>
+          <option>week</option>
+          <option>month</option>
+          <option>minute</option>
         </select>
       </label>
 
       <label class="item item-input">
         <span class="input-label">Amount</span>
         <input type="number" ng-model="medData.amount">
-      </label>
-
-      <label class="item item-input">
-        <span class="input-label">datetime</span>
-        <input type="number" ng-model="medData.dateTime">
       </label>
 
       <input class="addpill-submit button button-block button-positive col col-90 align-center large" type="submit" ng-click="submit()"></input>

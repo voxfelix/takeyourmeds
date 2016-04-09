@@ -43,15 +43,20 @@ app.controller('editPill', function($scope, $state, $stateParams, $ionicActionSh
         buttons: [],
         destructiveText: 'Delete',
         cancelText: 'Cancel',
+
         destructiveButtonClicked: function() {
-          console.log('deleting ', $scope.medData);
           pouchdb.get($scope.medData._id).then(function(doc) {
-            return pouchdb.remove(doc);
+            pouchdb.remove(doc); // remove a medication
             console.log('Deleted doc ' + $scope.id);
+
             $state.go('app', {}, {
               reload: true
             });
+            $cordovaLocalNotification.cancel($scope.medData._id, function () {
+                alert('cancelled');
+            }, this);
           });
+
         },
         buttonClicked: function(index) {
           return true;

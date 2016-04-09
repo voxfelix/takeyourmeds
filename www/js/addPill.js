@@ -42,12 +42,13 @@ app.controller('addPill', function($scope, $state, $stateParams, $ionicActionShe
     };
 
     $scope.localMessage = function(data) {
-        medication: data.name,
-        amount: data.amount,
-        frequency: data.repeat,
-        type: data.type
+        var medication = data.name;
+        var amount = data.amount;
+        var frequency = data.repeat;
+        var type = data.type;
 
-        return message: amount + 'of your ' +  frequency + ' ' + type + ', ' + medication + ', is scheduled to be taken now.'
+        message = 'You\'re daily reminder that Jack is sexy.';
+        return message;
     };
 
 
@@ -67,16 +68,6 @@ app.controller('addPill', function($scope, $state, $stateParams, $ionicActionShe
       }
       var val = (Math.max.apply(Math, list) + 1).toString();
       return val;
-    };
-
-    // $scope.getFrequency(datetime, freq) | ['every day', 'every second day', 'every third day' ... 'weekly', 'biweekly']
-    $scope.getFrequency = function(datetime, freq) {
-      var array = [];
-      array.push(datetime);
-      if (freq = 'every day') {
-        array.push(new Date().setDate(datetime.getDate() + 1).toString());
-      };
-      console.log(array);
     };
 
     // for medData object to put into $scope.submit
