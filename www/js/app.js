@@ -1,6 +1,6 @@
 var app = angular.module('starter', ['ionic', 'ngCordova', 'ui.router', 'ion-datetime-picker']);
 
-app.run(function($ionicPlatform, $rootScope, $http, $cordovaLocalNotification, $cordovaSms, contactdb) {
+app.run(function($ionicPlatform, $rootScope, $http) {
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins.Keyboard) {
 
@@ -26,29 +26,25 @@ app.run(function($ionicPlatform, $rootScope, $http, $cordovaLocalNotification, $
       .state('app', {
       cache: false,
       url: '/',
-      templateUrl: 'templates/home.html',
-      controller: 'index'
+      templateUrl: 'templates/home.html'
     })
     // for addPill view
       .state('addPill', {
       cache: false,
       url: '/addPill',
-      templateUrl: 'templates/addPill.html',
-      controller: 'addPill'
+      templateUrl: 'templates/addPill.html'
     })
     // for editPill view
       .state('editPill', {
       cache: false,
       url: '/editPill/:id',
-      templateUrl: 'templates/editPill.html',
-      controller: 'editPill'
+      templateUrl: 'templates/editPill.html'
     })
     // for contact
       .state('contacts', {
       cache: false,
       url: '/contacts',
-      templateUrl: 'templates/contacts.html',
-      controller: 'contacts'
+      templateUrl: 'templates/contacts.html'
     })
 
   });
