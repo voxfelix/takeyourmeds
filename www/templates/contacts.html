@@ -1,21 +1,27 @@
 <ion-pane ng-controller="contacts" onload="chooseContact()">
 
-  <ion-header-bar class="bar-stable bar-positive">
+  <ion-header-bar class="bar-stable bar-positive text-align-center">
      <ionic-nav-back-button class="button button-clear" ng-click="back()"><i class="ion-arrow-left-c"></i> Back</ionic-nav-back-button>
-     <h1 class="title">Contact</h1>
+     <h1 class="title center-align">Contact</h1>
   </ion-header-bar>
 
   <ion-content>
-    <div>Do you want to send {{ contact.displayName }} text message alerts?</div>
+    <div class="large room line-med">Do you wish to send {{ contact.displayName }} text message alerts?</div>
     <div>{{ contact }}</div>
-    <button class="button button-positive" ng-click="submit()">
-        <span class="big-text">Yes</span>
-        <span class=small-text>I want this person to recieve alerts</span>
-    </button>
-    <button class="button button-assertive" ng-click="chooseContact()">
-        <span class="big-text">No</span>
-        <span class=small-text>Choose another contact</span>
-    </button>
+    <div class="bottom">
+      <div class="">
+        <button class="button button-positive center-box" ng-click="submit()">
+            <span class="big-text large">Yes, I would like this person to recieve alerts.</span>
+        </button>
+        </div>
+        <p> </p>
+        <p> </p>
+        <div class = "">
+        <button class="button button-assertive center-box" ng-click="chooseContact()">
+            <span class="large">No, choose another contact.</span>
+        </button>
+      </div>
+    </div>
   </ion-content>
 
 </ion-pane>
