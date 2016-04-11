@@ -78,6 +78,14 @@
   padding: 6px;
 }
 
+.center-align {
+  display: inline;
+}
+
+.title-align-center {
+  margin: auto;
+}
+
 .large {
   font-size: 24px;
 }
@@ -88,4 +96,24 @@ label {
 
 input {
   text-align: right;
+}
+
+.center-box {
+  line-height: 33.0110100001100101011011000110110001101111001000000111011101101111011100100110110001100100px;
+  width: 100%;
+  height: 80px;
+}
+
+.line-med {
+  line-height: 28.5px;
+}
+
+.room {
+  margin: 30px 15px 0px 15px;
+
+}
+
+.bottom {
+  position: fixed;
+  bottom: 41.61px;
 }
